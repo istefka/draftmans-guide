@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draftmaster's Guide</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Draftmaster's Guide</h1>
+      <div class="game-container">
+        <div class="word-display">
+          <h2>Describe this word:</h2>
+          <p id="mainWord" class="main-word">Click to generate a word</p>
+        </div>
+        
+        <div class="restricted-words">
+          <h3>Don't use these words:</h3>
+          <ul id="restrictedList"></ul>
+        </div>
+
+        <button id="generateBtn" class="generate-btn">
+          Generate Word
+        </button>
+      </div>
+
+      <div class="instructions">
+        <h3>How to Play</h3>
+        <ol>
+          <li>Click "Generate Word" to get started</li>
+          <li>Describe the word to others</li>
+          <li>Don't use any of the restricted words!</li>
+        </ol>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
