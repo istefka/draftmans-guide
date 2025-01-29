@@ -5,33 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Draftmaster's Guide</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="container">
-      <h1>Draftmaster's Guide</h1>
-      <div class="game-container">
-        <div class="word-display">
-          <h2>Describe this word:</h2>
-          <p id="mainWord" class="main-word">Click to generate a word</p>
-        </div>
-        
-        <div class="restricted-words">
-          <h3>Don't use these words:</h3>
-          <ul id="restrictedList"></ul>
+      <div class="max-w-2xl w-full space-y-6">
+        <div class="text-center space-y-2">
+          <h1>Draftmaster's Guide</h1>
+          <p class="subtitle">The ultimate word description challenge</p>
         </div>
 
-        <button id="generateBtn" class="generate-btn">
-          Generate Word
-        </button>
-      </div>
+        <div class="game-container">
+          <div class="header">
+            <h2>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+              Your Word
+            </h2>
+            <div class="timer-controls">
+              <button id="timerBtn" class="timer-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="play-icon"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pause-icon hidden"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg>
+                <span id="timeDisplay">10:00</span>
+              </button>
+              <button id="resetBtn" class="reset-btn" title="Reset Timer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              </button>
+            </div>
+          </div>
 
-      <div class="instructions">
-        <h3>How to Play</h3>
-        <ol>
-          <li>Click "Generate Word" to get started</li>
-          <li>Describe the word to others</li>
-          <li>Don't use any of the restricted words!</li>
-        </ol>
+          <div id="wordContainer" class="word-container">
+            <p id="mainWord" class="main-word">Click to generate a word</p>
+          </div>
+
+          <div class="restricted-section">
+            <div class="restricted-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+              <h3>Restricted Words:</h3>
+            </div>
+            <div id="restrictedList" class="restricted-list"></div>
+          </div>
+
+          <button id="generateBtn" class="generate-btn">
+            Generate New Word
+          </button>
+        </div>
+
+        <div class="instructions">
+          <h3>How to Play</h3>
+          <ol>
+            <li><span class="number">1</span><span>Click "Generate New Word" to get a random word</span></li>
+            <li><span class="number">2</span><span>Start the timer when you're ready to begin</span></li>
+            <li><span class="number">3</span><span>Describe the word to your teammates</span></li>
+            <li><span class="number">4</span><span>Avoid using any of the restricted words!</span></li>
+          </ol>
+        </div>
       </div>
     </div>
     <script src="main.js"></script>

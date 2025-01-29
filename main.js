@@ -22,6 +22,19 @@ const words = [
 ];
 
 let lastIndex = -1;
+let timeLeft = 600;
+let timerInterval = null;
+let isRunning = false;
+
+const mainWord = document.getElementById('mainWord');
+const restrictedList = document.getElementById('restrictedList');
+const generateBtn = document.getElementById('generateBtn');
+const timerBtn = document.getElementById('timerBtn');
+const resetBtn = document.getElementById('resetBtn');
+const timeDisplay = document.getElementById('timeDisplay');
+const wordContainer = document.getElementById('wordContainer');
+const playIcon = document.querySelector('.play-icon');
+const pauseIcon = document.querySelector('.pause-icon');
 
 function getRandomWord() {
   let randomIndex;
@@ -34,15 +47,63 @@ function getRandomWord() {
 }
 
 function updateDisplay(wordObj) {
-  document.getElementById('mainWord').textContent = wordObj.word;
-  
-  const restrictedList = document.getElementById('restrictedList');
+  mainWord.textContent = wordObj.word;
   restrictedList.innerHTML = wordObj.restricted
-    .map(word => `<li>${word}</li>`)
+    .map(word => `<span class="restricted-word">${word}</span>`)
     .join('');
+    
+  wordContainer.classList.add('animate');
+  setTimeout(() => wordContainer.classList.remove('animate'), 300);
 }
 
-document.getElementById('generateBtn').addEventListener('click', () => {
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+}
+
+function toggleTimer() {
+  if (!isRunning && timeLeft === 0) {
+    timeLeft = 600;
+  }
+  
+  isRunning = !isRunning;
+  timerBtn.classList.toggle('running', isRunning);
+  playIcon.classList.toggle('hidden', isRunning);
+  pauseIcon.classList.toggle('hidden', !isRunning);
+  
+  if (isRunning) {
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timeDisplay.textContent = formatTime(timeLeft);
+      
+      if (timeLeft === 0) {
+        clearInterval(timerInterval);
+        isRunning = false;
+        timerBtn.classList.remove('running');
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+      }
+    }, 1000);
+  } else {
+    clearInterval(timerInterval);
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  isRunning = false;
+  timeLeft = 600;
+  timeDisplay.textContent = formatTime(timeLeft);
+  timerBtn.classList.remove('running');
+  playIcon.classList.remove('hidden');
+  pauseIcon.classList.add('hidden');
+}
+
+generateBtn.addEventListener('click', () => {
   const wordObj = getRandomWord();
   updateDisplay(wordObj);
 });
+
+timerBtn.addEventListener('click', toggleTimer);
+resetBtn.addEventListener('click', resetTimer);
